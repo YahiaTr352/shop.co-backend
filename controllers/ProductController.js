@@ -485,6 +485,87 @@ const searchProducts = async (req, res) => {
   }
 };
 
+const forBro = async (req, res) => {
+  try {
+    // const type = req.params.type;
+    // const page = parseInt(req.query.page) || 1;
+    // const limit = parseInt(req.query.limit) || 8;
+    // const skip = (page - 1) * limit;
+
+    const products = await Product.find({})
+
+    // const totalProducts = await Product.countDocuments({ typeOfProduct: type });
+    // const totalPages = Math.ceil(totalProducts / limit);
+
+    res.status(200).json({ products });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to get products by type", error });
+  }
+};
+
+const forBroTwo = async (req, res) => {
+  try {
+    const {
+      name,
+      description
+    } = req.body;
+
+    // const mainImage = req.files["mainImage"]
+    //   ? req.files["mainImage"][0].filename
+    //   : null;
+
+    // const imagesByColor = [];
+
+    // if (colors && req.files) {
+    //   const colorArray = colors.split(",").map(color => color.trim());
+    //   colorArray.forEach((color, index) => {
+    //     const colorImages = (req.files[`images-${index}`] || []).map(file => file.filename);
+
+    //     imagesByColor.push({
+    //       color: color,
+    //       images: colorImages,
+    //     });
+    //   });
+    // }
+
+    // const errors = validateAddProduct({ name, description, price, category, colors, sizes, stock, brand, typeOfProduct, material, dimensionsWidth, dimensionsHeight, releaseDate });
+
+    // if (Object.keys(errors).length > 0) {
+    //   return res.status(400).json(errors);
+    // }
+
+    // const newProduct = new Product({
+    //   name,
+    //   description,
+    //   typeOfProduct,
+    //   price,
+    //   mainImage,
+    //   imagesByColor,
+    //   category,
+    //   colors: colors.split(",").map((c) => c.trim()),
+    //   sizes: sizes.split(",").map((s) => s.trim()),
+    //   stock,
+    //   isTrending: isTrending === "true",
+    //   isNewArrival: isNewArrival === "true",
+    //   brand,
+    //   discount,
+    //   salesCount: salesCount || 0,
+    //   material,
+    //   dimensionsWidth,
+    //   dimensionsHeight,
+    //   releaseDate,
+    // });
+
+    // await newProduct.save();
+
+    res.status(200).json({ message: "Product added successfully"});
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Something went wrong", error });
+  }
+};
+
+
 module.exports = {
   AddProduct,
   PurchaseProduct,
@@ -503,5 +584,7 @@ module.exports = {
   AddRating,
   GetAllReviews,
   getRelatedProducts,
-  searchProducts
+  searchProducts,
+  forBro,
+  forBroTwo
 }

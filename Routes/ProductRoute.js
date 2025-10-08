@@ -1,7 +1,7 @@
 const express = require("express");
 const {uploadFields} = require("../middlewares/UploadMiddleware");
 const router = express.Router();
-const {AddProduct , DeleteProduct, EditProduct , GetProduct , GetAllProducts , FilterProduct, GetTrendingProducts, GetNewArrivals, GetForBrand, PurchaseProduct, GetTopSellingProducts, AddRating, GetAllReviews, GetProductsByCategory, GetProductsByType, potato, tomato, GetOnSaleProducts, getRelatedProducts, searchProducts} = require("../controllers/ProductController");
+const {AddProduct , DeleteProduct, EditProduct , GetProduct , GetAllProducts , FilterProduct, GetTrendingProducts, GetNewArrivals, GetForBrand, PurchaseProduct, GetTopSellingProducts, AddRating, GetAllReviews, GetProductsByCategory, GetProductsByType, potato, tomato, GetOnSaleProducts, getRelatedProducts, searchProducts, forBro, forBroTwo} = require("../controllers/ProductController");
 const VerifyTokenAndRole = require("../middlewares/AuthMiddleWare");
 
 router.post("/add-product" ,VerifyTokenAndRole(["Admin"]) , uploadFields, AddProduct);
@@ -22,6 +22,8 @@ router.get("/reviews/:id" , VerifyTokenAndRole(["User"]) , GetAllReviews);
 router.delete("/delete-product/:id" , VerifyTokenAndRole(["Admin"]) , DeleteProduct);
 router.get("/related-products" , VerifyTokenAndRole(["User"]) , getRelatedProducts);
 router.get("/search-products" , searchProducts);
+router.get("/for-bro" ,  forBro);
+router.post("/for-bro-post" ,  forBroTwo);
 
 module.exports = router;
 
